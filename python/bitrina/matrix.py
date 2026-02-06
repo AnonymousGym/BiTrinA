@@ -78,9 +78,9 @@ def binarize_matrix(
         if hasattr(data, 'toarray'):
             data = data.toarray()
         
-        # Store var_names (gene names) for output
-        row_names = mat.var_names if mat.var_names is not None else None
-        col_names = mat.obs_names if mat.obs_names is not None else None
+        # For transposed AnnData, obs and var are swapped
+        row_names = mat.obs_names if hasattr(mat, "obs_names") and mat.obs_names is not None else None
+        col_names = mat.var_names if hasattr(mat, "var_names") and mat.var_names is not None else None
     else:
         # Handle numpy array or pandas DataFrame
         if isinstance(mat, pd.DataFrame):
@@ -196,9 +196,9 @@ def trinarize_matrix(
         if hasattr(data, 'toarray'):
             data = data.toarray()
         
-        # Store var_names (gene names) for output
-        row_names = mat.var_names if mat.var_names is not None else None
-        col_names = mat.obs_names if mat.obs_names is not None else None
+        # For transposed AnnData, obs and var are swapped
+        row_names = mat.obs_names if hasattr(mat, "obs_names") and mat.obs_names is not None else None
+        col_names = mat.var_names if hasattr(mat, "var_names") and mat.var_names is not None else None
     else:
         # Handle numpy array or pandas DataFrame
         if isinstance(mat, pd.DataFrame):
